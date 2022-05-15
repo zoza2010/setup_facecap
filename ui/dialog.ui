@@ -7,13 +7,23 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>54</height>
+    <height>109</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QCheckBox" name="useTweakCheckBox">
+     <property name="text">
+      <string>use tweak</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>

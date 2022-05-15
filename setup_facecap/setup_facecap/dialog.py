@@ -1,7 +1,8 @@
 from .widgets.dialog import Ui_Form
-from .character_setup import CharacterSetup
+from .character_setup import CharacterSetupWithTweak, CharacterSetup
 from PySide2.QtWidgets import QWidget, QMessageBox
 from pyfbsdk import *
+import traceback
 import os
 
 
@@ -9,7 +10,6 @@ class Dialog(QWidget, Ui_Form):
     def __init__(self, parent=None):
         super(Dialog, self).__init__(parent)
         self.setupUi(self)
-        self._character_setup = CharacterSetup()
         self._configs_path = os.path.join(os.path.dirname(__file__), "configs")
         self.setFixedHeight(100)
         self._fill_defaults()
@@ -52,11 +52,13 @@ class Dialog(QWidget, Ui_Form):
             return
         else:
             mesh_model = selected.GetModel(0)
+
+        if self.useTweakCheckBox.isChecked():
+            character_setup = CharacterSetupWithTweak()
+        else:
+            character_setup = CharacterSetup()
+
         try:
-            self._character_setup.setup(mesh_model, config_path)
+            character_setup.setup(mesh_model, config_path)
         except Exception:
-            self._show_info_message(
-                "Error",
-                "Errors occurred during execution.\n For details read script editor.",
-            )
-            raise
+            self._show_info_message("Error", traceback.format_exc())
