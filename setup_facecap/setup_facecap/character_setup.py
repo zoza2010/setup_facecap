@@ -225,6 +225,11 @@ class CharacterSetupWithTweak(CharacterSetup):
                 _find("Clamp Max"),
             )
 
+            FBConnect(
+                facecap_tweak_device_sender_anim_channels.get(i + " scale"),
+                _find("Scale Factor"),
+            )
+
             scale_offset_node_in = self.find_node_by_name(
                 scale_offset_node.AnimationNodeInGet(), "X"
             )
